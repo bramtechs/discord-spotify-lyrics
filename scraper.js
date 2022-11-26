@@ -10,7 +10,9 @@ function sendLyric(sentence) {
     sentence: sentence,
   });
   url = URL + "?" + params.toString();
-  fetch(url).catch((error) => console.log(error));
+  fetch(url)
+    .catch((error) => console.log(error))
+    .then((r) => console.log(r));
 }
 
 dominate();
