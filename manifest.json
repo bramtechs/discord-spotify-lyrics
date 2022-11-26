@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "Spotty Lyrics",
+  "version": "1.0",
+  "description": "Scrapes lyrics from Spotify. Legally questionable.",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "discordlyrics@brambasiel.be",
+      "strict_min_version": "50.0"
+    }
+  },
+
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://open.spotify.com/lyrics"],
+      "js": ["scraper.js"]
+    }
+  ],
+
+  "permissions": ["*://localhost/*", "*://127.0.0.1/*"]
+}

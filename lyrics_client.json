@@ -1,0 +1,7 @@
+{
+  "name": "discord_lyrics",
+  "description": "Host for rich presence messaging",
+  "path": "C:\\dev\\spotify-scraper\\client_win.bat",
+  "type": "stdio",
+  "allowed_extensions": ["discordlyrics@brambasiel.be"]
+}
