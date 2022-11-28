@@ -1,6 +1,6 @@
 # Discord Spotify Lyrics 🎵
 
-Unfinished
+**Work in progress**
 
 A _janky_ method to display lyrics in Discord Rich Presence!
 
