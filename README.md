@@ -1,4 +1,4 @@
-# Discord Spotify Lyrics
+# Discord Spotify Lyrics 🎵
 
 Unfinished
 

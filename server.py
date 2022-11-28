@@ -12,13 +12,17 @@ app = flask.Flask(__name__)
 cors = flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
 
 sentence = "..."
+title = "Unknown - Unkown"
+end_time = 1
 
 
 @app.route("/update", methods=['GET'])
 def handle_update():
-    global sentence
+    global sentence, title, end_time
     sentence = flask.request.args['sentence']
-    print(sentence)
+    title = flask.request.args['title']
+    end_time = int(flask.request.args['ends'])
+    print(int(end_time))
     return "OK"
 
 
@@ -41,6 +45,10 @@ if __name__ == '__main__':
     print("connected to discord!")
 
     while True:  # The presence will stay on as long as the program is running
-        RPC.update(details="Rick Astley - Never gonna give you up",
-                   state=str(sentence))
-        time.sleep(3)
+        state = "🎵 " + sentence
+        if len(state) < 2 or sentence == '♪':  # prevent pauses from crashing
+            sentence = "(Intermission)"
+        RPC.update(details=title,
+                   state=state,
+                   end=end_time)
+        time.sleep(2)

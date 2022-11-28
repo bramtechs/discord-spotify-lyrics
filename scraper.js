@@ -5,14 +5,39 @@ const URL = "http://127.0.0.1:6966/update";
 
 let lastSentence = "...";
 
+function timeTextToSeconds(text) {
+  const members = text.split(":");
+  if (members.length == 2) {
+    return parseInt(members[0]) * 60 + parseInt(members[1]);
+  } else {
+    console.error("Invalid timestamp");
+    return 0;
+  }
+}
+
 function sendLyric(sentence) {
+  const title = document.title;
+  const timePos = document.querySelector("[data-testid='playback-position'");
+  const timeDuration = document.querySelector(
+    "[data-testid='playback-duration'"
+  );
+
+  const sinceEpoch = Math.floor(Date.now() / 1000);
+  const ends =
+    sinceEpoch +
+    timeTextToSeconds(timeDuration.innerHTML) -
+    timeTextToSeconds(timePos.innerHTML);
+
   const params = new URLSearchParams({
     sentence: sentence,
+    title: title,
+    ends: ends,
   });
+
   url = URL + "?" + params.toString();
   fetch(url)
     .catch((error) => console.log(error))
-    .then((r) => console.log(r));
+    .then((r) => console.log(params.toString()));
 }
 
 dominate();
@@ -33,7 +58,12 @@ function dominate() {
   document.body.style.border = "2px solid yellow";
 
   const logo = document.querySelector(logoClass);
-  logo.style.color = "yellow";
+  if (logo != null) {
+    console.warn("Couldn't find Spotify logo.");
+  } else {
+    logo.style.color = "yellow";
+    console.log("dominated");
+  }
 }
 
 function getLyric() {
